@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>Hello World! Lets play a game of Rock, Paper or Scissors</h1>
+    <h1>Hello World! Lets play a game of Rock, Paper, Scissors</h1>
     <br>
+    <br>
+    <h3>Scoreboard</h3>
+    <p class="humanScoreBoard"></p>
+    <p class="computerScoreBoard"></p>
     <br>
     <label for="rps_selection">Make a selection</label>
     <select name="rps_selection" id="rps_selection">
@@ -16,9 +22,11 @@
         <option value="Paper">Paper</option>
         <option value="Scissors">Scissors</option>
     </select>
-
+    <button type="submit" id="send">SEND</button>
+    <p class="myPara"></p>
     
 
     <script src="./rps.js"></script>
 </body>
+
 </html>
