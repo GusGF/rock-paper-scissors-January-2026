@@ -1,1 +1,2 @@
-Just a test
+This is my first piece of JS coding for a couple of years and while it's not great it does seem to work. I used an event listener instead of a prompt for user input. I'm sure it could be coded better and I will have a look at other peoples code. I came a bit unstuck as I didn't plan properly by using pseudocode or git extensively, I should have made more of an effort in this area. I also reinterpreted the design as to me a round of games made more sense so the function playGame() would be called multiple times for each round. 
+I also didn't see the point of putting playRound function and score variables so that they’re declared inside of the new playGame function and the spec didn't say why it was asking you to do this?!
