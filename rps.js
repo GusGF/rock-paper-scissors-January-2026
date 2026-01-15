@@ -1,13 +1,16 @@
 const myListBox = document.querySelector("#rps_selection");
 const myButton = document.querySelector("#send");
 const playerMsg = document.querySelector(".playerMsg");
+const roundMsg = document.querySelector(".roundMsg");
 const humanScoreBoard = document.querySelector(".humanScoreBoard");
 const computerScoreBoard = document.querySelector(".computerScoreBoard");
-let rounds = 1;
+
+const gamesLimit = 3;
+let games = gamesLimit;
 let computerScore = 0;
 let humanScore = 0;
 
-myButton.addEventListener("click", playRound)
+myButton.addEventListener("click", playGame)
 
 
 function getComputerChoice() {
@@ -25,36 +28,64 @@ function getHumanChoice() {
     return myListBox.value
 }
 
-function playRound() {
-    const humanChoice = getHumanChoice()
-    const computerChoice = getComputerChoice()
-    console.log(`Human: ${humanChoice}`)
-    console.log(`Computer: ${computerChoice}`)
-
-    if (humanChoice == computerChoice){
+function whoWon(humanChoice, computerChoice) {
+    if (humanChoice == computerChoice) {
         playerMsg.textContent = "It's a draw";
-    } else if (humanChoice == 'Rock' && computerChoice == 'Paper'){
+    } else if (humanChoice == 'Rock' && computerChoice == 'Paper') {
         playerMsg.textContent = "Well Done Computer, paper beats rock"
         computerScore++;
-    }  else if (humanChoice == 'Rock' && computerChoice == 'Scissors'){
+    } else if (humanChoice == 'Rock' && computerChoice == 'Scissors') {
         playerMsg.textContent = "Well Done Human, rock beats scissors"
         humanScore++;
-    }  else if (humanChoice == 'Paper' && computerChoice == 'Rock'){
+    } else if (humanChoice == 'Paper' && computerChoice == 'Rock') {
         playerMsg.textContent = "Well Done Human, paper beats rock"
         humanScore++;
-    }  else if (humanChoice == 'Paper' && computerChoice == 'Scissors'){
+    } else if (humanChoice == 'Paper' && computerChoice == 'Scissors') {
         playerMsg.textContent = "Well Done Computer, scissors beats paper"
         computerScore++;
-    }   else if (humanChoice == 'Scissors' && computerChoice == 'Rock'){
+    } else if (humanChoice == 'Scissors' && computerChoice == 'Rock') {
         playerMsg.textContent = "Well Done Computer, rock beats scissors"
         computerScore++;
-    }  else if (humanChoice == 'Scissors' && computerChoice == 'Paper'){
+    } else if (humanChoice == 'Scissors' && computerChoice == 'Paper') {
         playerMsg.textContent = "Well Done Human, scissors beats paper"
         humanScore++;
     } else {
         playerMsg.textContent = "No idea what went wrong"
     }
+}
 
-    humanScoreBoard.textContent = humanScore;
-    computerScoreBoard.textContent = computerScore;
+// Get ready for a new round of games
+function resetRoundScores() {
+    games = gamesLimit;
+    computerScore = 0;
+    humanScore = 0;
+}
+
+
+function playGame() {
+    // if new round games get rid of the prev outcome
+    if (games == gamesLimit) 
+        roundMsg.textContent = "";
+    games--;
+    const humanChoice = getHumanChoice()
+    const computerChoice = getComputerChoice()
+    console.log(`Human: ${humanChoice}`)
+    console.log(`Computer: ${computerChoice}`)
+
+    whoWon(humanChoice, computerChoice);
+    humanScoreBoard.textContent = `Human: ${humanScore}`;
+    computerScoreBoard.textContent = `Computer: ${computerScore}`;
+
+    // Let players know who has won the round when 'n' number of games have been played
+    if (games == 0) {
+        if (humanScore == computerScore)
+            roundMsg.textContent = "Game Over! It's a Draw";
+        else if (humanScore > computerScore)
+            roundMsg.textContent = "Human wins the set!"
+        else
+            roundMsg.textContent = "Computer wins the set!"
+        // prepare to the next 
+        resetRoundScores();
+    }
+
 }
